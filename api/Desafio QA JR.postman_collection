@@ -1,0 +1,262 @@
+{
+	"info": {
+		"_postman_id": "ca8b4034-494e-4ead-8383-5872c56aaecf",
+		"name": "Desafio QA JR",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "51426950",
+		"_collection_link": "https://deasbruna-4270065.postman.co/workspace/Bruna-de-Almeida's-Workspace~ba8c6275-e1c5-4ec1-80f6-cfc56bf7a378/collection/51426950-ca8b4034-494e-4ead-8383-5872c56aaecf?action=share&source=collection_link&creator=51426950"
+	},
+	"item": [
+		{
+			"name": "Listar Produtos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Validar se a requisição foi bem sucedida e o status code é 200.\r",
+							"pm.test(\"Validar Status Code 200\", function () {\r",
+							"    pm.expect(pm.response.code, \"Falha na conexão com a API\").to.equal(200);\r",
+							"});\r",
+							"\r",
+							"// Validar lista de produtos\r",
+							"pm.test(\"Validar Lista de Produtos\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.products, \"Não houve retorno de uma lista\").to.be.an('array');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/productsList",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"productsList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Marcas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Validar se a requisição foi bem sucedida e o status code é 200.\r",
+							"pm.test(\"Validar Status Code 200\", function () {\r",
+							"    pm.expect(pm.response.code, \"Falha na conexão com a API\").to.equal(200);\r",
+							"});\r",
+							"\r",
+							"// Validar lista de marcas\r",
+							"pm.test(\"Validar Lista de Marcas\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.brands, \"Não houve retorno de uma lista\").to.be.an('array');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/brandsList",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"brandsList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validar Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Valida se a requição foi bem sucedida e o status code é 200.\r",
+							"pm.test(\"Validar Status Code 200\", function () {\r",
+							"    pm.expect(pm.response.code, \"Falha na conexão com a API\").to.equal(200);\r",
+							"});\r",
+							"\r",
+							"// Valida ogin com suceso\r",
+							"pm.test(\"Validar Mensagem de Sucesso de login\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message, \"A mensagem de confirmação do sistema divergiu do esperado\").to.eql(\"User exists!\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "bruna.stuart@aec.com.br",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/verifyLogin",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"verifyLogin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Busca sem Parâmetro",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Valida se a requição foi bem sucedida e o status code é 200.\r",
+							"pm.test(\"Validar Status Code 200\", function () {\r",
+							"    pm.expect(pm.response.code, \"Falha na conexão com a API\").to.equal(200);\r",
+							"});\r",
+							"\r",
+							"//Valida se a API identificou que faltava um parâmetro de busca\r",
+							"pm.test(\"Reporte de erro parâmetro ausente\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    const valorRecebido = jsonData.responseCode;\r",
+							"    \r",
+							"    pm.expect(valorRecebido, \"A API não retornou o erro esperado para parâmetros ausentes. Valor real recebido: \" + valorRecebido).to.eql(400);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{baseUrl}}/searchProduct",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"searchProduct"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Método Não Suportado",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Valida se a requição foi bem sucedida e o status code é 200.\r",
+							"pm.test(\"Validar Status Code 200\", function () {\r",
+							"    pm.expect(pm.response.code, \"Falha na conexão com a API\").to.equal(200);\r",
+							"});\r",
+							"\r",
+							"//Valida se o método não é permitido\r",
+							"pm.test(\"Mensagem de Método Não Permitido\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message, \"A API deveria informar que o método DELETE não é suportado\").to.contain(\"not supported\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/productsList",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"productsList"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://automationexercise.com/api"
+		}
+	]
+}
