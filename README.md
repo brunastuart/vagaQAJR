@@ -8,6 +8,7 @@ Este repositório contém a entrega completa para o desafio de QA Júnior, abran
 
 Utilize os links abaixo para navegar rapidamente entre os módulos do desafio:
 
+---
 
 <h3><span style="color: #4CAF50;"><b>📋 Parte 1: Testes Manuais</b></span></h3>
 
